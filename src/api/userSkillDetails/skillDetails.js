@@ -25,8 +25,29 @@ export const getUserSkillDetails = async () => {
     profi: 'Master',
     peopleWithSameSkill: [
       {
-        name: 'Khan',
+        name: 'Khan Muhammad Asif Iqbal',
         designation: 'Web Dev',
+        isVerified: true,
+        image:
+          'https://res.cloudinary.com/torre-technologies-co/image/upload/v1639488123/origin/starrgate/users/profile_11a5c5529ba466f078040470dec3ef951840c09a.jpg',
+      },
+      {
+        name: 'Ed',
+        designation: 'Sr Web Dev',
+        isVerified: true,
+        image:
+          'https://res.cloudinary.com/torre-technologies-co/image/upload/v1639488123/origin/starrgate/users/profile_11a5c5529ba466f078040470dec3ef951840c09a.jpg',
+      },
+      {
+        name: 'Ed',
+        designation: 'Sr Web Dev',
+        isVerified: true,
+        image:
+          'https://res.cloudinary.com/torre-technologies-co/image/upload/v1639488123/origin/starrgate/users/profile_11a5c5529ba466f078040470dec3ef951840c09a.jpg',
+      },
+      {
+        name: 'Ed',
+        designation: 'Sr Web Dev',
         isVerified: true,
         image:
           'https://res.cloudinary.com/torre-technologies-co/image/upload/v1639488123/origin/starrgate/users/profile_11a5c5529ba466f078040470dec3ef951840c09a.jpg',

@@ -1,19 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
-const url = "";
+const url = '';
 
-export const getUserSkills = async () => {
+export const getUserSkills = async (id) => {
   const res = await axios.get(
-    "https://torreapi.azurewebsites.net/api/User/GetUsersBySkill/5B509BB8-42FE-4D5B-A957-3CB92F7E55CE"
+    `https://torreapi.azurewebsites.net/api/Skill/GetSkillsByUser/${id}`
   );
-  // return res.data;
-  return [
-    {
-      proficiency: "Master",
-      skillNames: ["Software Development", "Web Development"]
-    },
-    { proficiency: "Novice", skillNames: ["Team Management"] }
-  ];
+  return res.data;
 };
-
-//master, novice, expert, proficient, NoExperience

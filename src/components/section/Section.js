@@ -9,6 +9,54 @@ const Section = ({ skill }) => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = React.useState(false);
 
+  let icon = null;
+
+  switch (skill.proficiency) {
+    case 'Master / Influencer':
+      icon = (
+        <img
+          style={{ width: '25px' }}
+          src="https://cdn-icons-png.flaticon.com/512/3557/3557416.png"
+        />
+      );
+      break;
+
+    case 'Novice':
+      icon = (
+        <img
+          style={{ width: '25px' }}
+          src="https://icon-library.com/images/n-icon/n-icon-25.jpg"
+        />
+      );
+      break;
+
+    case 'Expert':
+      icon = (
+        <img
+          style={{ width: '25px' }}
+          src="https://www.clipartmax.com/png/full/424-4242161_expert-icon-transparent-expert-icon.png"
+        />
+      );
+      break;
+    case 'Proficient':
+      icon = (
+        <img
+          style={{ width: '25px' }}
+          src="https://mpng.subpng.com/20190125/zgo/kisspng-vector-graphics-computer-icons-royalty-free-illust-expertise-ssi-rm-5c4b90e54c3371.1919953615484561653121.jpg"
+        />
+      );
+      break;
+
+    default:
+      icon = (
+        <img
+          style={{ width: '25px' }}
+          src="https://library.kissclipart.com/20180914/fe/kissclipart-learning-icon-clipart-education-computer-icons-lea-34cfe1718546a09f.png"
+        />
+      );
+      break;
+  }
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -19,19 +67,19 @@ const Section = ({ skill }) => {
   return (
     <div className={styles.container}>
       <div className={styles.sectionHeader}>
-        <div className={styles.icon}>icon</div>
+        <div className={styles.icon}>{icon}</div>
         <div className={styles.name}>{skill.proficiency}</div>
       </div>
       <div className={styles.skillChips}>
-        {skill.skillNames &&
-          skill.skillNames.map((skills, index) => (
+        {skill.skills &&
+          skill.skills.map((skill, index) => (
             <div className={styles.chips} key={index}>
               <Chip
                 onClick={() => {
                   handleClickOpen();
                   dispatch(getSkillDetails());
                 }}
-                label={skills}
+                label={skill.name}
                 clickable
               />
             </div>

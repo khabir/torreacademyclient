@@ -1,4 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter');
+
 .App {
-  font-family: sans-serif;
+  font-family: 'Inter', sans-serif;
   text-align: center;
+  overflow: hidden;
+  color: #27292d;
+  background-color: #e7ebf0;
 }

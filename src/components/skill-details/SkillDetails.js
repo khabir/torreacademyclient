@@ -14,6 +14,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
 import CircularProgress from '@mui/material/CircularProgress';
+import Paper from '@mui/material/Paper';
 
 const SkillDetails = ({ open, handleClose }) => {
   const skillDetails = useAppSelector(selectSkillDetails);
@@ -28,7 +29,7 @@ const SkillDetails = ({ open, handleClose }) => {
 
   return (
     <Dialog fullScreen open={open} onClose={handleClose}>
-      <AppBar sx={{ position: 'relative' }}>
+      <AppBar className={styles.appBar} sx={{ position: 'relative' }}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -43,23 +44,23 @@ const SkillDetails = ({ open, handleClose }) => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <div className={styles.container}>
-        <div className={styles.displayFlex}>
-          <div className={styles.proficientName}>
-            {getKeyByValue(skillDetails, skillDetails.profi)}:
+      <Paper sx={{ backgroundColor: '#e7ebf0', height: '100%' }}>
+        <div className={styles.container}>
+          <div className={styles.displayFlex}>
+            <div className={styles.proficientName}>
+              {getKeyByValue(skillDetails, skillDetails.profi)}:
+            </div>
+            <div className={styles.proficientName}>{skillDetails.profi}</div>
           </div>
-          <div className={styles.proficientName}>{skillDetails.profi}</div>
-        </div>
-        <Divider />
-        <div className={styles.topPadding}>
-          <div className={styles.userFirstName}>
-            {skillDetails.userName && getTheFirstWord(skillDetails.userName)}'s
-            related experiences
-          </div>
-          {skillDetails.experience &&
-            skillDetails.experience?.map((exp, index) => (
-              <div style={{ marginBottom: 20 }} key={index}>
-                <Card sx={{ maxWidth: 400, padding: 1 }}>
+          <Divider />
+          <div className={styles.topPadding}>
+            <div className={styles.userFirstName}>
+              {skillDetails.userName && getTheFirstWord(skillDetails.userName)}
+              's related experiences
+            </div>
+            <div>
+              {skillDetails.experience &&
+                skillDetails.experience?.map((exp, index) => (
                   <CardContent>
                     <Typography variant="h5" component="div">
                       {exp.name}
@@ -67,55 +68,55 @@ const SkillDetails = ({ open, handleClose }) => {
                     <Typography variant="body2">
                       {exp.organizationName}
                     </Typography>
-                    <Typography
-                      sx={{ fontSize: 14 }}
-                      color="text.secondary"
-                      gutterBottom
-                    >
+                    <Typography sx={{ fontSize: 14 }} gutterBottom>
                       {exp.duration}
                     </Typography>
                   </CardContent>
-                </Card>
-              </div>
-            ))}
-        </div>
-        <Divider />
-        <div className={styles.topPadding}>
-          <div className={styles.userFirstName}>
-            {skillDetails &&
-              skillDetails.peopleWithSameSkill &&
-              skillDetails.peopleWithSameSkill.length > 0 &&
-              'Other people with this skill'}
+                ))}
+            </div>
           </div>
-          {skillDetails &&
-            skillDetails.peopleWithSameSkill?.map((person, index) => (
-              <div style={{ marginBottom: 20 }} key={index}>
-                <Card sx={{ maxWidth: 200, padding: 1 }}>
-                  <CardContent>
-                    <img
-                      src={person.image}
-                      alt={person.name}
-                      className={styles.profilePicture}
-                    />
-                    <Typography variant="h5" component="div">
-                      {person.name}
-                    </Typography>
-                    <Typography variant="body2">
-                      {person.designation}
-                    </Typography>
-                    <Typography
-                      sx={{ fontSize: 14 }}
-                      color="text.secondary"
-                      gutterBottom
-                    >
-                      {person.isVerified ? 'Verified' : 'Not verified'}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </div>
-            ))}
+          <Divider />
+          <div className={styles.topPadding}>
+            <div className={styles.userFirstName}>
+              {skillDetails &&
+                skillDetails.peopleWithSameSkill &&
+                skillDetails.peopleWithSameSkill.length > 0 &&
+                'Other people with this skill'}
+            </div>
+            <div className={styles.card}>
+              {skillDetails &&
+                skillDetails.peopleWithSameSkill?.map((person, index) => (
+                  <Card sx={{ mx: 2, my: 2 }} elevation={3}>
+                    <CardContent className={styles.bottomCard}>
+                      <div>
+                        <img
+                          src={person.image}
+                          alt={person.name}
+                          className={styles.profilePicture}
+                        />
+                      </div>
+                      <div>
+                        <Typography variant="h5" component="div">
+                          {person.name}
+                        </Typography>
+                        <Typography variant="body2">
+                          {person.designation}
+                        </Typography>
+                        <Typography
+                          sx={{ fontSize: 14 }}
+                          color="text.secondary"
+                          gutterBottom
+                        >
+                          {person.isVerified ? 'Verified' : 'Not verified'}
+                        </Typography>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+            </div>
+          </div>
         </div>
-      </div>
+      </Paper>
     </Dialog>
   );
 };
