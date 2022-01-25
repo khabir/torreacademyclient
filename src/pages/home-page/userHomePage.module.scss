@@ -1,0 +1,19 @@
+.profilePicture {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  padding: 20px;
+  object-fit: cover;
+  object-position: center right;
+}
+
+.profileName {
+  font-size: 40px;
+  padding: 10px 0 50px 0;
+}
+
+.sectionHeader {
+  font-size: 25px;
+  display: flex;
+  padding-left: 20px;
+}
