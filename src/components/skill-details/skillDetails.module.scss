@@ -24,7 +24,6 @@
 .userFirstName {
   font-size: 30px;
   padding-bottom: 15px;
-  font-weight: 800;
   font-family: 'Inter', sans-serif;
 }
 .topPadding {
@@ -61,4 +60,7 @@
 .bottomCard {
   display: flex;
   align-items: center;
+}
+.image {
+  padding-right: 20px;
 }

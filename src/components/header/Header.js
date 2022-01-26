@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
-  const pages = ['users', 'Skills'];
+  const pages = ['users', 'skills'];
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);

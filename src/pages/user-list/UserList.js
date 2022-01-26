@@ -4,17 +4,18 @@ import { useAppSelector } from '../../store/hooks';
 import { selectUserList } from '../../store/user-list/selectors';
 import { useAppDispatch } from '../../store/hooks';
 import { getUserList } from '../../store/user-list/thunk';
+import { getUser } from '../../store/user/thunk';
 import styles from './userList.module.scss';
 import CircularProgress from '@mui/material/CircularProgress';
-import Paper from '@mui/material/Paper';
 import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 
 const UserList = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const userList = useAppSelector(selectUserList);
 
@@ -29,7 +30,14 @@ const UserList = () => {
       ) : (
         userList.map((user, index) => {
           return (
-            <Card className={styles.card} elevation={3}>
+            <Card
+              onClick={() => {
+                dispatch(getUser(user.id));
+                navigate(`/`);
+              }}
+              className={styles.card}
+              elevation={3}
+            >
               <div className={styles.cardContainer}>
                 <CardMedia
                   className={styles.profilePicture}

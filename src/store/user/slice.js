@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getSkillList } from "./thunk";
+import { createSlice } from '@reduxjs/toolkit';
+import { getUser } from './thunk';
 
 const initialState = {
   data: [],
-  status: "idle"
+  status: 'idle',
 };
 
 export const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     // getUserSkill: (state, action) => {
@@ -19,14 +19,14 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getSkillList.pending, (state) => {
-        state.status = "loading";
+      .addCase(getUser.pending, (state) => {
+        state.status = 'loading';
       })
-      .addCase(getSkillList.fulfilled, (state, action) => {
-        state.status = "idle";
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.status = 'idle';
         state.data = action.payload;
       });
-  }
+  },
 });
 
 export default userSlice;

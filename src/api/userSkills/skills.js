@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getUserSkills = async (id) => {
+export const GetSkillsByUser = async (id) => {
   const res = await axios.get(
     `https://torreapi.azurewebsites.net/api/Skill/GetSkillsByUser/${id}`
   );

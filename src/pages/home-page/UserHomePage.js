@@ -3,7 +3,7 @@ import Section from '../../components/section/Section';
 import { useAppSelector } from '../../store/hooks';
 import { selectUserSkills } from '../../store/user/selectors';
 import { useAppDispatch } from '../../store/hooks';
-import { getSkillList } from '../../store/user/thunk';
+import { getUser } from '../../store/user/thunk';
 import styles from './userHomePage.module.scss';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -13,7 +13,9 @@ const UserHomePage = () => {
   const user = useAppSelector(selectUserSkills);
 
   React.useEffect(() => {
-    dispatch(getSkillList('407fcd19-a1be-4dd4-b28c-cd6a7da11748'));
+    if (!user.userId) {
+      dispatch(getUser('407fcd19-a1be-4dd4-b28c-cd6a7da11748'));
+    }
   }, []);
 
   return (
@@ -25,7 +27,9 @@ const UserHomePage = () => {
           className={styles.profilePicture}
         />
         <div className={styles.nameSection}>
-          <div className={styles.profileName}>Alexender Torrenegra</div>
+          <div className={styles.profileName}>
+            {user.firstName} {user.lastName}
+          </div>
           <br />
           {user.email && (
             <p>

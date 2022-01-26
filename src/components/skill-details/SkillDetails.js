@@ -60,15 +60,22 @@ const SkillDetails = ({ open, handleClose }) => {
             <div>
               {skillDetails.userExperiences &&
                 skillDetails.userExperiences?.map((exp, index) => (
-                  <CardContent>
-                    <Typography variant="h5" component="div">
-                      {exp.name}
-                    </Typography>
-                    <Typography variant="body2">{exp.organization}</Typography>
-                    <Typography sx={{ fontSize: 14 }} gutterBottom>
-                      {exp.fromMonth} {exp.fromYear} - {exp.toMonth}{' '}
-                      {exp.toYear}
-                    </Typography>
+                  <CardContent className={styles.displayFlex} key={index}>
+                    <div className={styles.image}>
+                      <img width={80} src="./exp.png" alt="" />
+                    </div>
+                    <div>
+                      <Typography variant="h5" component="div">
+                        {exp.name}
+                      </Typography>
+                      <Typography variant="h6">
+                        {exp.organization.name}
+                      </Typography>
+                      <Typography sx={{ fontSize: 14 }} gutterBottom>
+                        {exp.fromMonth} {exp.fromYear} - {exp.toMonth}{' '}
+                        {exp.toYear}
+                      </Typography>
+                    </div>
                   </CardContent>
                 ))}
             </div>
@@ -81,7 +88,7 @@ const SkillDetails = ({ open, handleClose }) => {
               </div>
               <div className={styles.card}>
                 {skillDetails.relatedUsers.map((person, index) => (
-                  <CardContent className={styles.bottomCard}>
+                  <CardContent key={index} className={styles.bottomCard}>
                     <div>
                       <img
                         src="https://res.cloudinary.com/torre-technologies-co/image/upload/v1639488123/origin/starrgate/users/profile_11a5c5529ba466f078040470dec3ef951840c09a.jpg"
@@ -94,7 +101,7 @@ const SkillDetails = ({ open, handleClose }) => {
                         {person.firstName} {person.lastName}
                       </Typography>
                       <Typography variant="body2">
-                        {person.designation}
+                        {person.recentExperience.name}
                       </Typography>
                       <Typography
                         sx={{ fontSize: 14 }}
