@@ -3,7 +3,7 @@ import Section from '../../components/section/Section';
 import { useAppSelector } from '../../store/hooks';
 import { selectUserSkills } from '../../store/user/selectors';
 import { useAppDispatch } from '../../store/hooks';
-import { getUser } from '../../store/user/thunk';
+import { getSkillsByUser } from '../../store/user/thunk';
 import styles from './userHomePage.module.scss';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -14,7 +14,7 @@ const UserHomePage = () => {
 
   React.useEffect(() => {
     if (!user.userId) {
-      dispatch(getUser('407fcd19-a1be-4dd4-b28c-cd6a7da11748'));
+      dispatch(getSkillsByUser('407fcd19-a1be-4dd4-b28c-cd6a7da11748'));
     }
   }, []);
 
@@ -22,7 +22,7 @@ const UserHomePage = () => {
     <div className={styles.container}>
       <div className={styles.user}>
         <img
-          src="https://res.cloudinary.com/torre-technologies-co/image/upload/v1639488123/origin/starrgate/users/profile_11a5c5529ba466f078040470dec3ef951840c09a.jpg"
+          src={user.profilePicture}
           alt="kbr"
           className={styles.profilePicture}
         />
@@ -33,7 +33,7 @@ const UserHomePage = () => {
           <br />
           {user.email && (
             <p>
-              Full Stack Developer | {user.email} | {user.phone}
+              {user.recentExperience?.name} | {user.email} | {user.phone}
             </p>
           )}
         </div>

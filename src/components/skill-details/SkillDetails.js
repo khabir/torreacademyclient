@@ -13,10 +13,16 @@ import Divider from '@mui/material/Divider';
 import CircularProgress from '@mui/material/CircularProgress';
 import Paper from '@mui/material/Paper';
 import { selectUserSkills } from '../../store/user/selectors';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../store/hooks';
+import { getSkillsByUser } from '../../store/user/thunk';
 
 const SkillDetails = ({ open, handleClose }) => {
   const skillDetails = useAppSelector(selectSkillDetails);
   const user = useAppSelector(selectUserSkills);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   if (skillDetails.length === 0) {
     return (
@@ -88,10 +94,14 @@ const SkillDetails = ({ open, handleClose }) => {
               </div>
               <div className={styles.card}>
                 {skillDetails.relatedUsers.map((person, index) => (
-                  <CardContent key={index} className={styles.bottomCard}>
+                  <CardContent key={index} className={styles.bottomCard} onClick={() => {
+                    debugger;
+                    dispatch(getSkillsByUser(user.userId));
+                    navigate(`/`);
+                  }}>
                     <div>
                       <img
-                        src="https://res.cloudinary.com/torre-technologies-co/image/upload/v1639488123/origin/starrgate/users/profile_11a5c5529ba466f078040470dec3ef951840c09a.jpg"
+                        src={person.profilePicture}
                         alt={person.firstName}
                         className={styles.profilePicture}
                       />
@@ -103,13 +113,11 @@ const SkillDetails = ({ open, handleClose }) => {
                       <Typography variant="body2">
                         {person.recentExperience.name}
                       </Typography>
-                      <Typography
-                        sx={{ fontSize: 14 }}
-                        color="text.secondary"
-                        gutterBottom
-                      >
-                        {person.isVerified ? 'Verified' : 'Not verified'}
-                      </Typography>
+                      <Typography variant="body2" className={styles.active}>
+                    {
+                      user.status
+                    }
+                  </Typography>
                     </div>
                   </CardContent>
                 ))}

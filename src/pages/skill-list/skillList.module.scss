@@ -1,0 +1,48 @@
+.profilePicture {
+    width: 50px;
+    margin: auto;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    padding: 10px;
+    object-fit: cover;
+    object-position: center right;
+  }
+  
+  .container {
+    margin: 0 20%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .cardContainer {
+    display: flex;
+    margin-right: auto;
+    padding: 0 20px;
+  }
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 500px;
+    margin: 20px;
+    cursor: pointer;
+  }
+  .cardSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 20px;
+  }
+  .active{
+    background-color: #0ba10b;
+    border: 1px solid #0ba10b;
+    color: white;
+    padding: 0px 10px;
+    font-size: 12px !important;
+    border-radius: 0.25rem;
+  }

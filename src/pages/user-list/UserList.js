@@ -4,7 +4,7 @@ import { useAppSelector } from '../../store/hooks';
 import { selectUserList } from '../../store/user-list/selectors';
 import { useAppDispatch } from '../../store/hooks';
 import { getUserList } from '../../store/user-list/thunk';
-import { getUser } from '../../store/user/thunk';
+import { getSkillsByUser } from '../../store/user/thunk';
 import styles from './userList.module.scss';
 import CircularProgress from '@mui/material/CircularProgress';
 import Card from '@mui/material/Card';
@@ -32,7 +32,7 @@ const UserList = () => {
           return (
             <Card
               onClick={() => {
-                dispatch(getUser(user.id));
+                dispatch(getSkillsByUser(user.id));
                 navigate(`/`);
               }}
               className={styles.card}
@@ -41,18 +41,26 @@ const UserList = () => {
               <div className={styles.cardContainer}>
                 <CardMedia
                   className={styles.profilePicture}
-                  image="https://res.cloudinary.com/torre-technologies-co/image/upload/v1639488123/origin/starrgate/users/profile_11a5c5529ba466f078040470dec3ef951840c09a.jpg"
+                  image={user.profilePicture}
                   alt="green iguana"
                 />
                 <CardContent className={styles.cardSection}>
                   <Typography gutterBottom variant="h5" component="div">
                     {user.firstName} {user.lastName}
                   </Typography>
+                  <Typography gutterBottom variant="h7" component="div">
+                    {user.recentExperience?.name}
+                  </Typography>
                   <Typography variant="body2" color="text.secondary">
                     {user.email}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     {user.phone}
+                  </Typography>
+                  <Typography variant="body2" className={styles.active}>
+                    {
+                      user.status === 1? "Active" : "Inactive" 
+                    }
                   </Typography>
                 </CardContent>
               </div>

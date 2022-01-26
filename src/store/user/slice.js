@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getUser } from './thunk';
+import { getSkillsByUser } from './thunk';
 
 const initialState = {
   data: [],
@@ -19,10 +19,10 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getUser.pending, (state) => {
+      .addCase(getSkillsByUser.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(getUser.fulfilled, (state, action) => {
+      .addCase(getSkillsByUser.fulfilled, (state, action) => {
         state.status = 'idle';
         state.data = action.payload;
       });
