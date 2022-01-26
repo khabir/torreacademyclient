@@ -8,16 +8,15 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import { useAppSelector } from '../../store/hooks';
 import { selectSkillDetails } from '../../store/skillDetails/selectors';
-import getKeyByValue from '../../helper/getKeyByValue';
-import getTheFirstWord from '../../helper/getTheFirstWord';
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
 import CircularProgress from '@mui/material/CircularProgress';
 import Paper from '@mui/material/Paper';
+import { selectUserSkills } from '../../store/user/selectors';
 
 const SkillDetails = ({ open, handleClose }) => {
   const skillDetails = useAppSelector(selectSkillDetails);
+  const user = useAppSelector(selectUserSkills);
 
   if (skillDetails.length === 0) {
     return (
@@ -40,81 +39,76 @@ const SkillDetails = ({ open, handleClose }) => {
             <CloseIcon />
           </IconButton>
           <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-            {skillDetails.name}
+            {skillDetails.skillName}
           </Typography>
         </Toolbar>
       </AppBar>
-      <Paper sx={{ backgroundColor: '#e7ebf0', height: '100%' }}>
+      <Paper sx={{ backgroundColor: '#e7ebf0' }}>
         <div className={styles.container}>
           <div className={styles.displayFlex}>
+            <div className={styles.proficientName}>Proficiency:</div>
             <div className={styles.proficientName}>
-              {getKeyByValue(skillDetails, skillDetails.profi)}:
+              {skillDetails.skillProficiency}
             </div>
-            <div className={styles.proficientName}>{skillDetails.profi}</div>
           </div>
           <Divider />
           <div className={styles.topPadding}>
             <div className={styles.userFirstName}>
-              {skillDetails.userName && getTheFirstWord(skillDetails.userName)}
+              {user.firstName}
               's related experiences
             </div>
             <div>
-              {skillDetails.experience &&
-                skillDetails.experience?.map((exp, index) => (
+              {skillDetails.userExperiences &&
+                skillDetails.userExperiences?.map((exp, index) => (
                   <CardContent>
                     <Typography variant="h5" component="div">
                       {exp.name}
                     </Typography>
-                    <Typography variant="body2">
-                      {exp.organizationName}
-                    </Typography>
+                    <Typography variant="body2">{exp.organization}</Typography>
                     <Typography sx={{ fontSize: 14 }} gutterBottom>
-                      {exp.duration}
+                      {exp.fromMonth} {exp.fromYear} - {exp.toMonth}{' '}
+                      {exp.toYear}
                     </Typography>
                   </CardContent>
                 ))}
             </div>
           </div>
           <Divider />
-          <div className={styles.topPadding}>
-            <div className={styles.userFirstName}>
-              {skillDetails &&
-                skillDetails.peopleWithSameSkill &&
-                skillDetails.peopleWithSameSkill.length > 0 &&
-                'Other people with this skill'}
-            </div>
-            <div className={styles.card}>
-              {skillDetails &&
-                skillDetails.peopleWithSameSkill?.map((person, index) => (
-                  <Card sx={{ mx: 2, my: 2 }} elevation={3}>
-                    <CardContent className={styles.bottomCard}>
-                      <div>
-                        <img
-                          src={person.image}
-                          alt={person.name}
-                          className={styles.profilePicture}
-                        />
-                      </div>
-                      <div>
-                        <Typography variant="h5" component="div">
-                          {person.name}
-                        </Typography>
-                        <Typography variant="body2">
-                          {person.designation}
-                        </Typography>
-                        <Typography
-                          sx={{ fontSize: 14 }}
-                          color="text.secondary"
-                          gutterBottom
-                        >
-                          {person.isVerified ? 'Verified' : 'Not verified'}
-                        </Typography>
-                      </div>
-                    </CardContent>
-                  </Card>
+          {skillDetails.relatedUsers.length !== 0 && (
+            <div className={styles.topPadding}>
+              <div className={styles.userFirstName}>
+                Other people with this skill
+              </div>
+              <div className={styles.card}>
+                {skillDetails.relatedUsers.map((person, index) => (
+                  <CardContent className={styles.bottomCard}>
+                    <div>
+                      <img
+                        src="https://res.cloudinary.com/torre-technologies-co/image/upload/v1639488123/origin/starrgate/users/profile_11a5c5529ba466f078040470dec3ef951840c09a.jpg"
+                        alt={person.firstName}
+                        className={styles.profilePicture}
+                      />
+                    </div>
+                    <div>
+                      <Typography variant="h5" component="div">
+                        {person.firstName} {person.lastName}
+                      </Typography>
+                      <Typography variant="body2">
+                        {person.designation}
+                      </Typography>
+                      <Typography
+                        sx={{ fontSize: 14 }}
+                        color="text.secondary"
+                        gutterBottom
+                      >
+                        {person.isVerified ? 'Verified' : 'Not verified'}
+                      </Typography>
+                    </div>
+                  </CardContent>
                 ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </Paper>
     </Dialog>

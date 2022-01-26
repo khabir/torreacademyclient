@@ -13,9 +13,11 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './header.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const pages = ['Users', 'Skills'];
+  const navigate = useNavigate();
+  const pages = ['users', 'Skills'];
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -44,7 +46,12 @@ const Header = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 10, display: { xs: 'none', md: 'flex' } }}
+            onClick={() => navigate('/')}
+            sx={{
+              mr: 10,
+              display: { xs: 'none', md: 'flex' },
+              cursor: 'pointer',
+            }}
           >
             <img src="./torre.co_en.png" alt="log" />
           </Typography>
@@ -89,7 +96,12 @@ const Header = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            onClick={() => navigate('/')}
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'flex', md: 'none' },
+              cursor: 'pointer',
+            }}
           >
             <img src="./torre.co_en.png" alt="log" />
           </Typography>
@@ -97,7 +109,7 @@ const Header = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => navigate(`/${page}`)}
                 sx={{ mx: 1, color: 'white', display: 'block' }}
               >
                 {page}

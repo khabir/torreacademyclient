@@ -5,10 +5,9 @@ import SkillDetails from '../skill-details/SkillDetails';
 import { getSkillDetails } from '../../store/skillDetails/thunk';
 import { useAppDispatch } from '../../store/hooks';
 
-const Section = ({ skill }) => {
+const Section = ({ skill, userId }) => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = React.useState(false);
-
   let icon = null;
 
   switch (skill.proficiency) {
@@ -77,7 +76,7 @@ const Section = ({ skill }) => {
               <Chip
                 onClick={() => {
                   handleClickOpen();
-                  dispatch(getSkillDetails());
+                  dispatch(getSkillDetails({ userId, skillId: skill.id }));
                 }}
                 label={skill.name}
                 clickable

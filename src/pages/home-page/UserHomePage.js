@@ -27,7 +27,11 @@ const UserHomePage = () => {
         <div className={styles.nameSection}>
           <div className={styles.profileName}>Alexender Torrenegra</div>
           <br />
-          <p>Full Stack Developer | {user.email} | {user.phone}</p>
+          {user.email && (
+            <p>
+              Full Stack Developer | {user.email} | {user.phone}
+            </p>
+          )}
         </div>
       </div>
       <div className={styles.subBody}>
@@ -36,7 +40,7 @@ const UserHomePage = () => {
           <CircularProgress />
         ) : (
           user.proficiencyWiseSkills.map((skill, index) => {
-            return <Section key={index} skill={skill} />;
+            return <Section userId={user.userId} key={index} skill={skill} />;
           })
         )}
       </div>
